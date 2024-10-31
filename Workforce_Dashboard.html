@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stacked Bar Chart, Treemap, and Basic Column with ApexCharts</title>
+    <!-- นำเข้า ApexCharts -->
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <style>
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .chart-block {
+            flex: 1 1 calc(33.333% - 20px);
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .chart {
+            width: 100%;
+            height: 350px;
+        }
+
+        @media (max-width: 768px) {
+            .chart-block {
+                flex: 1 1 calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chart-block {
+                flex: 1 1 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="chart-container">
+        <div class="chart-block">
+            <h3>กำลังคนรวมทุกบริษัท จำแนกตามเพศและประเภทพนักงาน</h3>
+            <div id="employeeByGenderChart" class="chart"></div>
+        </div>
+        <div class="chart-block">
+            <h3>กำลังคนจำแนกตามสัญชาติและเพศ</h3>
+            <div id="employeeByNationalityChart" class="chart"></div>
+        </div>
+        <div class="chart-block">
+            <h3>เปรียบเทียบกำลังคนทั้งหมด, กำลังคนว่าง, และขอกำลังคน</h3>
+            <div id="overallEmployeeStatusChart" class="chart"></div>
+        </div>
+        <div class="chart-block">
+            <h3>เปรียบเทียบการขอกำลังคน, จัดสรรกำลังคน, อนุมัติกำลังคน, และยืนยันเข้าทำงาน</h3>
+            <div id="employeeRequestProcessChart" class="chart"></div>
+        </div>
+        <div class="chart-block">
+            <h3>เปรียบเทียบกำลังคนว่าง, จัดสรรกำลังคน, และยืนยันเข้าทำงาน</h3>
+            <div id="availableEmployeeComparisonChart" class="chart"></div>
+        </div>
+        <div class="chart-block">
+            <h3>ข้อมูลกำลังคนที่โอนออกให้กับแผนกอื่น</h3>
+            <div id="transferredEmployeeChart" class="chart"></div>
+        </div>
+        <div class="chart-block">
+            <h3>ข้อมูลกำลังคนที่ได้รับโอนจากแผนกอื่น</h3>
+            <div id="receivedEmployeeChart" class="chart"></div>
+        </div>
+        <div class="chart-block">
+            <h3>ข้อมูลค่าใช้จ่ายที่ได้รับจากการโอนออกกำลังคนให้กับแผนกอื่น</h3>
+            <div id="transferCostChart" class="chart"></div>
+        </div>
+        <div class="chart-block">
+            <h3>ข้อมูลค่าใช้จ่ายที่เกิดจากการรับโอนย้ายกำลังจากแผนกอื่น</h3>
+            <div id="receivedCostChart" class="chart"></div>
+        </div>
+    </div>
+
+    <script>
+        // ข้อมูลตัวอย่างที่ได้จาก Python สำหรับกราฟแท่งแบบซ้อน
+        const dataForEmployeeByGenderChart = {
+            men: [100, 200],
+            women: [120, 180],
+            categories: ['รายวัน', 'รายเดือน']
+        };
+
+        const employeeByGenderOptions = {
+            series: [{
+                name: 'ชาย',
+                data: dataForEmployeeByGenderChart.men
+            }, {
+                name: 'หญิง',
+                data: dataForEmployeeByGenderChart.women
+            }],
+            chart: {
+                type: 'bar',
+                height: 350,
+                stacked: true
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                },
+            },
+            xaxis: {
+                categories: dataForEmployeeByGenderChart.categories,
+                title: {
+                    text: 'ประเภทพนักงาน'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'กำลังคน'
+                }
+            },
+            legend: {
+                position: 'top'
+            },
+            fill: {
+                opacity: 1
+            },
+            colors: ['#1f77b4', '#ff7f0e']
+        };
+
+        const employeeByGenderChart = new ApexCharts(document.querySelector("#employeeByGenderChart"), employeeByGenderOptions);
+        employeeByGenderChart.render();
+
+        // ข้อมูลตัวอย่างสำหรับกราฟ Treemap โดยมี 5 สัญชาติ
+        const dataForEmployeeByNationalityChart = {
+            series: [
+                {
+                    name: 'ไทย',
+                    data: [{ x: 'ชาย', y: 150 }, { x: 'หญิง', y: 130 }]
+                },
+                {
+                    name: 'ลาว',
+                    data: [{ x: 'ชาย', y: 80 }, { x: 'หญิง', y: 90 }]
+                },
+                {
+                    name: 'พม่า',
+                    data: [{ x: 'ชาย', y: 60 }, { x: 'หญิง', y: 70 }]
+                },
+                {
+                    name: 'เขมร',
+                    data: [{ x: 'ชาย', y: 50 }, { x: 'หญิง', y: 60 }]
+                },
+                {
+                    name: 'เวียดนาม',
+                    data: [{ x: 'ชาย', y: 40 }, { x: 'หญิง', y: 50 }]
+                }
+            ]
+        };
+
+        const employeeByNationalityOptions = {
+            series: dataForEmployeeByNationalityChart.series,
+            chart: {
+                type: 'treemap',
+                height: 350
+            },
+            title: {
+                text: 'กำลังคนจำแนกตามสัญชาติและเพศ'
+            },
+            dataLabels: {
+                enabled: true,
+                style: {
+                    fontSize: '14px',
+                },
+                formatter: function (text, op) {
+                    return op.w.globals.seriesNames[op.seriesIndex] + ' - ' + text + ': ' + op.value;
+                }
+            },
+            legend: {
+                show: true,
+                position: 'top'
+            },
+            colors: ['#008FFB', '#FEB019', '#00E396', '#FF4560', '#775DD0']  // สีสำหรับแต่ละสัญชาติ
+        };
+
+        const employeeByNationalityChart = new ApexCharts(document.querySelector("#employeeByNationalityChart"), employeeByNationalityOptions);
+        employeeByNationalityChart.render();
+
+        // ข้อมูลตัวอย่างสำหรับกราฟ Basic Column
+        const dataForOverallEmployeeStatusChart = {
+            series: [{
+                name: 'กำลังคนทั้งหมด',
+                data: [300]
+            }, {
+                name: 'กำลังคนว่าง (Available)',
+                data: [50]
+            }, {
+                name: 'ขอกำลังคน (Request)',
+                data: [80]
+            }],
+            categories: ['กำลังคนทั้งหมด']
+        };
+
+        const overallEmployeeStatusOptions = {
+            series: dataForOverallEmployeeStatusChart.series,
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '55%'
+                },
+            },
+            dataLabels: {
+                enabled: true
+            },
+            xaxis: {
+                categories: dataForOverallEmployeeStatusChart.categories,
+                title: {
+                    text: 'ประเภทข้อมูลกำลังคน'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'จำนวนกำลังคน'
+                }
+            },
+            title: {
+                text: 'เปรียบเทียบข้อมูลกำลังคนทั้งหมด, กำลังคนว่าง และขอกำลังคน'
+            },
+            legend: {
+                position: 'top'
+            },
+            colors: ['#1f77b4', '#00E396', '#FF4560']  // สีสำหรับแต่ละข้อมูล
+        };
+
+        const overallEmployeeStatusChart = new ApexCharts(document.querySelector("#overallEmployeeStatusChart"), overallEmployeeStatusOptions);
+        overallEmployeeStatusChart.render();
+
+        // ข้อมูลตัวอย่างสำหรับกราฟ Basic Column เปรียบเทียบการขอกำลังคน
+        const dataForEmployeeRequestProcessChart = {
+            series: [{
+                name: 'ขอกำลังคน (Request)',
+                data: [100]
+            }, {
+                name: 'จัดสรรกำลังคน',
+                data: [80]
+            }, {
+                name: 'อนุมัติกำลังคน',
+                data: [70]
+            }, {
+                name: 'ยืนยันเข้าทำงาน',
+                data: [60]
+            }],
+            categories: ['กำลังคน']
+        };
+
+        const employeeRequestProcessOptions = {
+            series: dataForEmployeeRequestProcessChart.series,
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '55%'
+                },
+            },
+            dataLabels: {
+                enabled: true
+            },
+            xaxis: {
+                categories: dataForEmployeeRequestProcessChart.categories,
+                title: {
+                    text: 'ประเภทข้อมูลกำลังคน'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'จำนวนกำลังคน'
+                }
+            },
+            title: {
+                text: 'เปรียบเทียบการขอกำลังคน, จัดสรรกำลังคน, อนุมัติกำลังคน, และยืนยันเข้าทำงาน'
+            },
+            legend: {
+                position: 'top'
+            },
+            colors: ['#FF4560', '#008FFB', '#00E396', '#775DD0']  // สีสำหรับแต่ละข้อมูล
+        };
+
+        const employeeRequestProcessChart = new ApexCharts(document.querySelector("#employeeRequestProcessChart"), employeeRequestProcessOptions);
+        employeeRequestProcessChart.render();
+
+        // ข้อมูลตัวอย่างสำหรับกราฟ Basic Column เปรียบเทียบกำลังคนว่าง
+        const dataForAvailableEmployeeComparisonChart = {
+            series: [{
+                name: 'กำลังคนว่าง (Available)',
+                data: [50]
+            }, {
+                name: 'จัดสรรกำลังคน',
+                data: [40]
+            }, {
+                name: 'ยืนยันเข้าทำงาน',
+                data: [30]
+            }],
+            categories: ['กำลังคน']
+        };
+
+        const availableEmployeeComparisonOptions = {
+            series: dataForAvailableEmployeeComparisonChart.series,
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '55%'
+                },
+            },
+            dataLabels: {
+                enabled: true
+            },
+            xaxis: {
+                categories: dataForAvailableEmployeeComparisonChart.categories,
+                title: {
+                    text: 'ประเภทข้อมูลกำลังคน'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'จำนวนกำลังคน'
+                }
+            },
+            title: {
+                text: 'เปรียบเทียบกำลังคนว่าง, จัดสรรกำลังคน, และยืนยันเข้าทำงาน'
+            },
+            legend: {
+                position: 'top'
+            },
+            colors: ['#00E396', '#008FFB', '#775DD0']  // สีสำหรับแต่ละข้อมูล
+        };
+
+        const availableEmployeeComparisonChart = new ApexCharts(document.querySelector("#availableEmployeeComparisonChart"), availableEmployeeComparisonOptions);
+        availableEmployeeComparisonChart.render();
+
+        // ข้อมูลตัวอย่างสำหรับกราฟ Basic Column โอนกำลังคนออกให้กับแผนกอื่น
+        const dataForTransferredEmployeeChart = {
+            series: [{
+                name: 'กำลังคนที่โอนออก',
+                data: [70, 55, 40, 65, 50]
+            }],
+            categories: ['แผนก A', 'แผนก B', 'แผนก C', 'แผนก D', 'แผนก E']
+        };
+
+        const transferredEmployeeOptions = {
+            series: dataForTransferredEmployeeChart.series,
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '55%'
+                },
+            },
+            dataLabels: {
+                enabled: true
+            },
+            xaxis: {
+                categories: dataForTransferredEmployeeChart.categories,
+                title: {
+                    text: 'แผนกรับโอน'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'จำนวนกำลังคน'
+                }
+            },
+            title: {
+                text: 'ข้อมูลกำลังคนที่โอนออกให้กับแผนกอื่น'
+            },
+            legend: {
+                position: 'top'
+            },
+            colors: ['#546E7A', '#FF6347', '#4682B4', '#32CD32', '#FFA500']  // สีสำหรับข้อมูลโอนกำลังคนออก
+        };
+
+        const transferredEmployeeChart = new ApexCharts(document.querySelector("#transferredEmployeeChart"), transferredEmployeeOptions);
+        transferredEmployeeChart.render();
+
+        // ข้อมูลตัวอย่างสำหรับกราฟ Basic Column แสดงข้อมูลกำลังคนที่ได้รับโอนจากแผนกอื่น
+        const dataForReceivedEmployeeChart = {
+            series: [{
+                name: 'กำลังคนที่ได้รับโอน',
+                data: [90, 75, 60, 85, 70]
+            }],
+            categories: ['แผนก A', 'แผนก B', 'แผนก C', 'แผนก D', 'แผนก E']
+        };
+
+        const receivedEmployeeOptions = {
+            series: dataForReceivedEmployeeChart.series,
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '55%'
+                },
+            },
+            dataLabels: {
+                enabled: true
+            },
+            xaxis: {
+                categories: dataForReceivedEmployeeChart.categories,
+                title: {
+                    text: 'แผนกโอนออกกำลังคน'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'จำนวนกำลังคน'
+                }
+            },
+            title: {
+                text: 'ข้อมูลกำลังคนที่ได้รับโอนจากแผนกอื่น'
+            },
+            legend: {
+                position: 'top'
+            },
+            colors: ['#FF8C00']  // สีสำหรับข้อมูลกำลังคนที่ได้รับโอน
+        };
+
+        const receivedEmployeeChart = new ApexCharts(document.querySelector("#receivedEmployeeChart"), receivedEmployeeOptions);
+        receivedEmployeeChart.render();
+
+        // ข้อมูลตัวอย่างสำหรับกราฟ Basic Column แสดงข้อมูลค่าใช้จ่ายที่ได้รับจากการโอนออกกำลังคนให้กับแผนกอื่น
+        const dataForTransferCostChart = {
+            series: [
+                {
+                    name: 'ค่าแรง',
+                    data: [10000, 8500, 7500, 9000, 8000]
+                },
+                {
+                    name: 'ค่าโอที',
+                    data: [2000, 1500, 1200, 1800, 1600]
+                },
+                {
+                    name: 'ค่าเบี้ยเลี้ยง',
+                    data: [1000, 800, 700, 900, 750]
+                },
+                {
+                    name: 'ค่าแรงรวม',
+                    data: [13000, 10800, 9400, 11700, 10350]
+                }
+            ],
+            categories: ['แผนก A', 'แผนก B', 'แผนก C', 'แผนก D', 'แผนก E']
+        };
+
+        const transferCostOptions = {
+            series: dataForTransferCostChart.series,
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '55%'
+                },
+            },
+            dataLabels: {
+                enabled: true
+            },
+            xaxis: {
+                categories: dataForTransferCostChart.categories,
+                title: {
+                    text: 'แผนกรับโอน'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'ค่าแรง (บาท)'
+                }
+            },
+            title: {
+                text: 'ข้อมูลค่าใช้จ่ายที่ได้รับจากการโอนออกกำลังคนให้กับแผนกอื่น'
+            },
+            legend: {
+                position: 'top'
+            },
+            colors: ['#1f77b4', '#FF4560', '#00E396', '#FEB019']  // สีสำหรับแต่ละประเภทค่าใช้จ่าย
+        };
+
+        const transferCostChart = new ApexCharts(document.querySelector("#transferCostChart"), transferCostOptions);
+        transferCostChart.render();
+
+        // ข้อมูลตัวอย่างสำหรับกราฟ Basic Column แสดงข้อมูลค่าใช้จ่ายที่เกิดจากการรับโอนย้ายกำลังจากแผนกอื่น
+        const dataForReceivedCostChart = {
+            series: [
+                {
+                    name: 'ค่าแรง',
+                    data: [9500, 8000, 7200, 8700, 7800]
+                },
+                {
+                    name: 'ค่าโอที',
+                    data: [1800, 1400, 1000, 1700, 1500]
+                },
+                {
+                    name: 'ค่าเบี้ยเลี้ยง',
+                    data: [900, 700, 650, 850, 700]
+                },
+                {
+                    name: 'ค่าแรงรวม',
+                    data: [12200, 10100, 8850, 11250, 10000]
+                }
+            ],
+            categories: ['แผนก A', 'แผนก B', 'แผนก C', 'แผนก D', 'แผนก E']
+        };
+
+        const receivedCostOptions = {
+            series: dataForReceivedCostChart.series,
+            chart: {
+                type: 'bar',
+                height: 350
+            },
+            plotOptions: {
+                bar: {
+                    columnWidth: '55%'
+                },
+            },
+            dataLabels: {
+                enabled: true
+            },
+            xaxis: {
+                categories: dataForReceivedCostChart.categories,
+                title: {
+                    text: 'แผนกโอนออกกำลังคน'
+                }
+            },
+            yaxis: {
+                title: {
+                    text: 'ค่าแรง (บาท)'
+                }
+            },
+            title: {
+                text: 'ข้อมูลค่าใช้จ่ายที่เกิดจากการรับโอนย้ายกำลังจากแผนกอื่น'
+            },
+            legend: {
+                position: 'top'
+            },
+            colors: ['#1f77b4', '#FF4560', '#00E396', '#FEB019']  // สีสำหรับแต่ละประเภทค่าใช้จ่าย
+        };
+
+        const receivedCostChart = new ApexCharts(document.querySelector("#receivedCostChart"), receivedCostOptions);
+        receivedCostChart.render();
+    </script>
+</body>
+
+</html>
