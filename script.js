@@ -41,7 +41,7 @@ const employeeByGenderOptions = {
     fill: {
         opacity: 1
     },
-    colors: ['#1f77b4', '#ff7f0e']
+    colors: ['#008FFB', '#FEB019'] // สีสำหรับชายและหญิง
 };
 
 // ใช้ setTimeout เพื่อให้แน่ใจว่าทุกกราฟถูกโหลดได้ถูกต้อง
