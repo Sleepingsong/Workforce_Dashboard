@@ -5,14 +5,21 @@ const dataForEmployeeByGenderChart = {
     categories: ['รายวัน', 'รายเดือน']
 };
 
+// คำนวณผลรวมสำหรับแต่ละเพศ
+const totalMen = dataForEmployeeByGenderChart.men.reduce((a, b) => a + b, 0); // ผลรวมของชาย = 300
+const totalWomen = dataForEmployeeByGenderChart.women.reduce((a, b) => a + b, 0); // ผลรวมของหญิง = 300
+
 const employeeByGenderOptions = {
-    series: [{
-        name: 'ชาย',
-        data: dataForEmployeeByGenderChart.men
-    }, {
-        name: 'หญิง',
-        data: dataForEmployeeByGenderChart.women
-    }],
+    series: [
+        {
+            name: 'ชาย',
+            data: [...dataForEmployeeByGenderChart.men, totalMen] // เพิ่มผลรวมของชายในท้ายสุด
+        },
+        {
+            name: 'หญิง',
+            data: [...dataForEmployeeByGenderChart.women, totalWomen] // เพิ่มผลรวมของหญิงในท้ายสุด
+        }
+    ],
     chart: {
         type: 'bar',
         height: 350,
@@ -25,7 +32,7 @@ const employeeByGenderOptions = {
         },
     },
     xaxis: {
-        categories: dataForEmployeeByGenderChart.categories,
+        categories: [...dataForEmployeeByGenderChart.categories, 'ผลรวม'], // เพิ่มหมวดหมู่ "ผลรวม" ใน categories
         title: {
             text: 'ประเภทพนักงาน'
         }
@@ -53,6 +60,7 @@ setTimeout(() => {
 }, 100);
 
 
+
 // ข้อมูลตัวอย่างสำหรับกราฟ Column โดยมี 5 สัญชาติ
 const dataForEmployeeByNationalityChart = {
     series: [
@@ -67,8 +75,21 @@ const dataForEmployeeByNationalityChart = {
     ]
 };
 
+// คำนวณผลรวมของชายและหญิง
+const totalMenSum = dataForEmployeeByNationalityChart.series[0].data.reduce((a, b) => a + b, 0);
+const totalWomenSum = dataForEmployeeByNationalityChart.series[1].data.reduce((a, b) => a + b, 0);
+
 const employeeByNationalityOptions = {
-    series: dataForEmployeeByNationalityChart.series,
+    series: [
+        {
+            name: 'ชาย',
+            data: [...dataForEmployeeByNationalityChart.series[0].data, totalMenSum] // เพิ่มผลรวมของชายในท้ายสุด
+        },
+        {
+            name: 'หญิง',
+            data: [...dataForEmployeeByNationalityChart.series[1].data, totalWomenSum] // เพิ่มผลรวมของหญิงในท้ายสุด
+        }
+    ],
     chart: {
         type: 'bar',
         height: 350,
@@ -81,7 +102,7 @@ const employeeByNationalityOptions = {
         },
     },
     xaxis: {
-        categories: ['ไทย', 'ลาว', 'พม่า', 'เขมร', 'เวียดนาม'], // สัญชาติ
+        categories: ['ไทย', 'ลาว', 'พม่า', 'เขมร', 'เวียดนาม', 'ผลรวม'], // เพิ่ม "ผลรวม" ใน categories
         title: {
             text: 'สัญชาติ'
         }
@@ -109,7 +130,6 @@ setTimeout(() => {
         employeeByNationalityChart.render();
     });
 }, 100);
-
 
 
 // ข้อมูลตัวอย่างสำหรับกราฟ Basic Column
