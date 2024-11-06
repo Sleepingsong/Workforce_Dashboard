@@ -1,4 +1,4 @@
-// ข้อมูลตัวอย่างที่ได้จาก Python สำหรับกราฟแท่งแบบซ้อน
+// ข้อมูลตัวอย่างที่ได้จาก Python สำหรับกราฟแท่งแบบแยก
 const dataForEmployeeByGenderChart = {
     men: [100, 200],
     women: [120, 180],
@@ -16,11 +16,12 @@ const employeeByGenderOptions = {
     chart: {
         type: 'bar',
         height: 350,
-        stacked: true
+        stacked: false // ตั้งค่า stacked เป็น false เพื่อแยกแท่งออกจากกัน
     },
     plotOptions: {
         bar: {
             horizontal: false,
+            columnWidth: '50%' // ตั้งค่า columnWidth ให้มีขนาดที่เหมาะสมสำหรับการแยกแท่ง
         },
     },
     xaxis: {
@@ -51,6 +52,7 @@ setTimeout(() => {
     });
 }, 100);
 
+
 // ข้อมูลตัวอย่างสำหรับกราฟ Column โดยมี 5 สัญชาติ
 const dataForEmployeeByNationalityChart = {
     series: [
@@ -70,7 +72,13 @@ const employeeByNationalityOptions = {
     chart: {
         type: 'bar',
         height: 350,
-        stacked: true // ใช้ stacked bar เพื่อให้แสดงเพศชายและหญิงในแต่ละสัญชาติ
+        stacked: false // ตั้งค่า stacked เป็น false เพื่อแยกแท่งออกจากกัน
+    },
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            columnWidth: '50%' // กำหนดขนาดความกว้างของแท่งเพื่อให้มีระยะห่างที่เหมาะสม
+        },
     },
     xaxis: {
         categories: ['ไทย', 'ลาว', 'พม่า', 'เขมร', 'เวียดนาม'], // สัญชาติ
@@ -101,6 +109,7 @@ setTimeout(() => {
         employeeByNationalityChart.render();
     });
 }, 100);
+
 
 
 // ข้อมูลตัวอย่างสำหรับกราฟ Basic Column
