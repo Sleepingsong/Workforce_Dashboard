@@ -158,7 +158,7 @@ const overallEmployeeStatusOptions = {
     legend: {
         position: 'top'
     },
-    colors: ['#1f77b4', '#00E396', '#FF4560']
+    colors: ['#0000FF', '#44b8ff', '#FF0000'],  // น้ำเงิน, ฟ้า, แดง
 };
 
 
@@ -219,7 +219,7 @@ const employeeRequestProcessOptions = {
     legend: {
         position: 'top'
     },
-    colors: ['#FF4560', '#008FFB', '#00E396', '#775DD0']
+    colors: ['#FF0000', '#FFD700', '#008000', '#800080'],  // แดง, เหลือง, เขียว, ม่วง
 };
 
 // ใช้ setTimeout เพื่อให้แน่ใจว่ากราฟ Employee Request Process ถูกโหลดได้ถูกต้อง
@@ -276,7 +276,7 @@ const availableEmployeeComparisonOptions = {
     legend: {
         position: 'top'
     },
-    colors: ['#00E396', '#008FFB', '#775DD0']
+    colors: ['#44b8ff', '#FFD700', '#800080'],  // ฟ้า, เหลือง, ม่วง
 };
 
 setTimeout(() => {
@@ -326,7 +326,7 @@ const transferredEmployeeOptions = {
     legend: {
         position: 'top'
     },
-    colors: ['#546E7A']
+    colors: ['#44b8ff']
 };
 
 setTimeout(() => {
@@ -376,7 +376,7 @@ const receivedEmployeeOptions = {
     legend: {
         position: 'top'
     },
-    colors: ['#FF8C00']
+    colors: ['#ff0000']
 };
 
 setTimeout(() => {
@@ -440,7 +440,7 @@ const transferCostOptions = {
     legend: {
         position: 'top'
     },
-    colors: ['#1f77b4', '#FF4560', '#00E396', '#FEB019']
+    colors: ['#00008B', '#FF0000', '#FFD700', '#008000']  // ฟ้าเข้ม, แดง, เหลือง, เขียว
 };
 
 setTimeout(() => {
@@ -504,7 +504,7 @@ const receivedCostOptions = {
     legend: {
         position: 'top'
     },
-    colors: ['#1f77b4', '#FF4560', '#00E396', '#FEB019']
+    colors: ['#00008B', '#FF0000', '#FFD700', '#008000']  // ฟ้าเข้ม, แดง, เหลือง, เขียว
 };
 
 setTimeout(() => {
