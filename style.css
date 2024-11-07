@@ -42,3 +42,19 @@ legend {
         flex: 1 1 100%;
     }
 }
+
+/* กำหนดให้ .date แสดงบนบรรทัดใหม่ */
+.date {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: #555; /* สีอ่อนลงเล็กน้อย */
+}
+
+/* ใช้ CSS เพื่อให้ช่วงวันที่แสดงในบรรทัดใหม่ */
+.date-range {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.8em;
+    color: #555; /* สีอ่อนลงเล็กน้อย */
+}

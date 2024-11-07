@@ -112,10 +112,6 @@ const employeeByNationalityOptions = {
             text: 'กำลังคน'
         }
     },
-    title: {
-        text: 'กำลังคนจำแนกตามสัญชาติและเพศ',
-        align: 'center'
-    },
     legend: {
         show: true,
         position: 'top'
@@ -171,9 +167,6 @@ const overallEmployeeStatusOptions = {
         title: {
             text: 'จำนวนกำลังคน'
         }
-    },
-    title: {
-        text: 'เปรียบเทียบข้อมูลกำลังคนทั้งหมด, กำลังคนว่าง และขอกำลังคน'
     },
     legend: {
         position: 'top'
@@ -233,9 +226,6 @@ const employeeRequestProcessOptions = {
             text: 'จำนวนกำลังคน'
         }
     },
-    title: {
-        text: 'เปรียบเทียบการขอกำลังคน, จัดสรรกำลังคน, อนุมัติกำลังคน, และยืนยันเข้าทำงาน'
-    },
     legend: {
         position: 'top'
     },
@@ -290,9 +280,6 @@ const availableEmployeeComparisonOptions = {
             text: 'จำนวนกำลังคน'
         }
     },
-    title: {
-        text: 'เปรียบเทียบกำลังคนว่าง, จัดสรรกำลังคน, และยืนยันเข้าทำงาน'
-    },
     legend: {
         position: 'top'
     },
@@ -340,9 +327,6 @@ const transferredEmployeeOptions = {
             text: 'จำนวนกำลังคน'
         }
     },
-    title: {
-        text: 'ข้อมูลกำลังคนที่โอนออกให้กับแผนกอื่น'
-    },
     legend: {
         position: 'top'
     },
@@ -389,9 +373,6 @@ const receivedEmployeeOptions = {
         title: {
             text: 'จำนวนกำลังคน'
         }
-    },
-    title: {
-        text: 'ข้อมูลกำลังคนที่ได้รับโอนจากแผนกอื่น'
     },
     legend: {
         position: 'top'
@@ -454,9 +435,6 @@ const transferCostOptions = {
             text: 'ค่าแรง (บาท)'
         }
     },
-    title: {
-        text: 'ข้อมูลค่าใช้จ่ายที่ได้รับจากการโอนออกกำลังคนให้กับแผนกอื่น'
-    },
     legend: {
         position: 'top'
     },
@@ -517,9 +495,6 @@ const receivedCostOptions = {
         title: {
             text: 'ค่าแรง (บาท)'
         }
-    },
-    title: {
-        text: 'ข้อมูลค่าใช้จ่ายที่เกิดจากการรับโอนย้ายกำลังจากแผนกอื่น'
     },
     legend: {
         position: 'top'
