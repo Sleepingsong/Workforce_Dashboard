@@ -48,7 +48,7 @@ const employeeByGenderOptions = {
     fill: {
         opacity: 1
     },
-    colors: ['#008FFB', '#FEB019'] // สีสำหรับชายและหญิง
+    colors: ['#1F77B4', '#FF7F0E'] // สีสำหรับชายและหญิง
 };
 
 // ใช้ setTimeout เพื่อให้แน่ใจว่าทุกกราฟถูกโหลดได้ถูกต้อง
@@ -116,7 +116,7 @@ const employeeByNationalityOptions = {
         show: true,
         position: 'top'
     },
-    colors: ['#008FFB', '#FEB019'] // สีสำหรับชายและหญิง
+    colors: ['#1F77B4', '#FF7F0E'] // สีสำหรับชายและหญิง
 };
 
 // ใช้ setTimeout เพื่อให้แน่ใจว่ากราฟ Employee By Nationality ถูกโหลดได้ถูกต้อง
@@ -171,7 +171,7 @@ const overallEmployeeStatusOptions = {
     legend: {
         position: 'top'
     },
-    colors: ['#0000FF', '#44b8ff', '#FF0000'],  // น้ำเงิน, ฟ้า, แดง
+    colors: ['#051584', '#3EA8F4', '#FF0000'],  // น้ำเงิน, ฟ้า, แดง
 };
 
 
@@ -229,7 +229,7 @@ const employeeRequestProcessOptions = {
     legend: {
         position: 'top'
     },
-    colors: ['#FF0000', '#FFD700', '#008000', '#800080'],  // แดง, เหลือง, เขียว, ม่วง
+    colors: ['#FF0000', '#FFC000', '#00B050', '#7030A0'],  // แดง, เหลือง, เขียว, ม่วง
 };
 
 // ใช้ setTimeout เพื่อให้แน่ใจว่ากราฟ Employee Request Process ถูกโหลดได้ถูกต้อง
@@ -283,7 +283,7 @@ const availableEmployeeComparisonOptions = {
     legend: {
         position: 'top'
     },
-    colors: ['#44b8ff', '#FFD700', '#800080'],  // ฟ้า, เหลือง, ม่วง
+    colors: ['#3EA8F4', '#FFC000', '#7030A0'],  // ฟ้า, เหลือง, ม่วง
 };
 
 setTimeout(() => {
@@ -330,7 +330,7 @@ const transferredEmployeeOptions = {
     legend: {
         position: 'top'
     },
-    colors: ['#44b8ff']
+    colors: ['#3EA8F4']
 };
 
 setTimeout(() => {
@@ -438,7 +438,7 @@ const transferCostOptions = {
     legend: {
         position: 'top'
     },
-    colors: ['#00008B', '#FF0000', '#FFD700', '#008000']  // ฟ้าเข้ม, แดง, เหลือง, เขียว
+    colors: ['#1F77B4', '#FF0000', '#FFC000', '#00B050']  // ฟ้าเข้ม, แดง, เหลือง, เขียว
 };
 
 setTimeout(() => {
@@ -496,10 +496,11 @@ const receivedCostOptions = {
             text: 'ค่าแรง (บาท)'
         }
     },
+
     legend: {
         position: 'top'
     },
-    colors: ['#00008B', '#FF0000', '#FFD700', '#008000']  // ฟ้าเข้ม, แดง, เหลือง, เขียว
+    colors: ['#1F77B4', '#FF0000', '#FFC000', '#00B050']  // ฟ้าเข้ม, แดง, เหลือง, เขียว
 };
 
 setTimeout(() => {
@@ -529,7 +530,7 @@ const genderRatioOptions = {
     legend: {
         position: 'bottom'
     },
-    colors: ['#1f77b4', '#ff7f0e']
+    colors: ['#1F77B4', '#FF7F0E']
 };
 
 setTimeout(() => {

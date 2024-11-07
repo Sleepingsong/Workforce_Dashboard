@@ -58,3 +58,31 @@ legend {
     font-size: 0.8em;
     color: #555; /* สีอ่อนลงเล็กน้อย */
 }
+
+/* สไตล์สำหรับตารางข้อมูล */
+.color-table {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+}
+
+.color-table th, .color-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.color-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+}
+
+.color-sample {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
