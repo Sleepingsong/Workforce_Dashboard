@@ -60,7 +60,6 @@ setTimeout(() => {
 }, 100);
 
 
-
 // ข้อมูลตัวอย่างสำหรับกราฟ Column โดยมี 5 สัญชาติ
 const dataForEmployeeByNationalityChart = {
     series: [
@@ -634,40 +633,39 @@ setTimeout(() => {
 }, 100);
 
 // ข้อมูลตัวอย่าง
-const dataForWorkforceComparisonChart = {
+const dataForWorkforceComparisonByCompany = {
     series: [
         {
             name: 'กำลังคนทั้งหมด',
-            data: [1000, 0, 0, 0] // จำนวนสำหรับแต่ละหมวดหมู่ (เฉพาะ "กำลังคนทั้งหมด")
+            data: [1000, 1200, 1100] // จำนวน "กำลังคนทั้งหมด" สำหรับแต่ละบริษัท
         },
         {
             name: 'จัดสรรกำลังคน',
-            data: [0, 800, 0, 0] // จำนวนสำหรับแต่ละหมวดหมู่ (เฉพาะ "กำลังคนที่ทำงาน")
+            data: [800, 950, 880] // จำนวน "จัดสรรกำลังคน" สำหรับแต่ละบริษัท
         },
         {
             name: 'กำลังคนว่าง (Available)',
-            data: [0, 0, 200, 0] // จำนวนสำหรับแต่ละหมวดหมู่ (เฉพาะ "กำลังคนว่าง")
+            data: [200, 250, 220] // จำนวน "กำลังคนว่าง" สำหรับแต่ละบริษัท
         },
-       
         {
             name: 'ขอกำลังคน (Request)',
-            data: [0, 0, 0, 150] // จำนวนสำหรับแต่ละหมวดหมู่ (เฉพาะ "ขอกำลังคน")
+            data: [150, 180, 170] // จำนวน "ขอกำลังคน" สำหรับแต่ละบริษัท
         }
     ],
-    categories: ['กำลังคนทั้งหมด', 'จัดสรรกำลังคน', 'กำลังคนว่าง', 'ขอกำลังคน']
+    categories: ['บริษัท A', 'บริษัท B', 'บริษัท C'] // รายชื่อบริษัทในแกน X
 };
 
 // ตั้งค่ากราฟ
-const workforceComparisonOptions = {
+const workforceComparisonByCompanyOptions = {
     chart: {
         type: 'bar',
         height: 400,
     },
-    series: dataForWorkforceComparisonChart.series,
+    series: dataForWorkforceComparisonByCompany.series,
     xaxis: {
-        categories: dataForWorkforceComparisonChart.categories, // กำหนดแกน X
+        categories: dataForWorkforceComparisonByCompany.categories, // กำหนดแกน X เป็นรายบริษัท
         title: {
-            text: 'ประเภทกำลังคน'
+            text: 'บริษัท'
         }
     },
     yaxis: {
@@ -679,11 +677,11 @@ const workforceComparisonOptions = {
         position: 'top', // ย้าย Legend ไปด้านบน
         horizontalAlign: 'center'
     },
-    colors: ['#051584',  '#FFC000', '#3EA8F4', '#FF0000'], // สีสำหรับแต่ละประเภท
+    colors: ['#051584', '#FFC000', '#3EA8F4', '#FF0000'], // สีสำหรับแต่ละประเภท
     plotOptions: {
         bar: {
             horizontal: false,
-            columnWidth: '50%', // ความกว้างของแท่ง
+            columnWidth: '50%' // ความกว้างของแท่ง
         },
     },
     tooltip: {
@@ -695,10 +693,11 @@ const workforceComparisonOptions = {
 // เรนเดอร์กราฟ
 setTimeout(() => {
     document.querySelectorAll(".WorkforceComparisonChart").forEach(chartElement => {
-        const workforceComparisonChart = new ApexCharts(chartElement, workforceComparisonOptions);
+        const workforceComparisonChart = new ApexCharts(chartElement, workforceComparisonByCompanyOptions);
         workforceComparisonChart.render();
     });
 }, 100);
+
 
 // ข้อมูลตัวอย่าง
 const dataForCompanyWorkforceChart = {
@@ -758,136 +757,6 @@ setTimeout(() => {
         companyWorkforceChart.render();
     });
 }, 100);
-
-// // ข้อมูลตัวอย่าง
-// const dataForTopDepartmentsChart = {
-//     series: [
-//         {
-//             name: 'กำลังคนว่าง (Available)',
-//             data: [120, 110, 100, 90, 85, 80, 75, 70, 65, 60] // จำนวนกำลังคนว่างของแต่ละแผนก
-//         }
-//     ],
-//     categories: [
-//         'แผนก A',
-//         'แผนก B',
-//         'แผนก C',
-//         'แผนก D',
-//         'แผนก E',
-//         'แผนก F',
-//         'แผนก G',
-//         'แผนก H',
-//         'แผนก I',
-//         'แผนก J'
-//     ] // ชื่อแผนก
-// };
-
-// // ตั้งค่ากราฟ
-// const topDepartmentsAvailableOptions = {
-//     chart: {
-//         type: 'bar',
-//         height: 400,
-//     },
-//     series: dataForTopDepartmentsChart.series,
-//     xaxis: {
-//         categories: dataForTopDepartmentsChart.categories, // กำหนดแกน X
-//         title: {
-//             text: 'แผนก'
-//         }
-//     },
-//     yaxis: {
-//         title: {
-//             text: 'จำนวนกำลังคน (คน)'
-//         }
-//     },
-//     legend: {
-//         position: 'top', // ย้าย Legend ไปด้านบน
-//         horizontalAlign: 'center'
-//     },
-//     colors: ['#3EA8F4'], // สีสำหรับกราฟกำลังคนว่าง
-//     plotOptions: {
-//         bar: {
-//             horizontal: false,
-//             columnWidth: '50%', // ความกว้างของแท่ง
-//         },
-//     },
-//     tooltip: {
-//         shared: true,
-//         intersect: false,
-//     }
-// };
-
-// // เรนเดอร์กราฟ
-// setTimeout(() => {
-//     document.querySelectorAll(".TopDepartmentsAvailableChart").forEach(chartElement => {
-//         const topDepartmentsAvailableChart = new ApexCharts(chartElement, topDepartmentsAvailableOptions);
-//         topDepartmentsAvailableChart.render();
-//     });
-// }, 100);
-
-// // ข้อมูลตัวอย่าง
-// const dataForTopDepartmentsRequestChart = {
-//     series: [
-//         {
-//             name: 'ขอกำลังคน (Request)',
-//             data: [140, 130, 120, 110, 100, 95, 90, 85, 80, 75] // จำนวนขอกำลังคนของแต่ละแผนก
-//         }
-//     ],
-//     categories: [
-//         'แผนก A',
-//         'แผนก B',
-//         'แผนก C',
-//         'แผนก D',
-//         'แผนก E',
-//         'แผนก F',
-//         'แผนก G',
-//         'แผนก H',
-//         'แผนก I',
-//         'แผนก J'
-//     ] // ชื่อแผนก
-// };
-
-// // ตั้งค่ากราฟ
-// const topDepartmentsRequestOptions = {
-//     chart: {
-//         type: 'bar',
-//         height: 400,
-//     },
-//     series: dataForTopDepartmentsRequestChart.series,
-//     xaxis: {
-//         categories: dataForTopDepartmentsRequestChart.categories, // กำหนดแกน X
-//         title: {
-//             text: 'แผนก'
-//         }
-//     },
-//     yaxis: {
-//         title: {
-//             text: 'จำนวนกำลังคน (คน)'
-//         }
-//     },
-//     legend: {
-//         position: 'top', // ย้าย Legend ไปด้านบน
-//         horizontalAlign: 'center'
-//     },
-//     colors: ['#FF7F0E'], // สีสำหรับกราฟการขอกำลังคน
-//     plotOptions: {
-//         bar: {
-//             horizontal: false,
-//             columnWidth: '50%', // ความกว้างของแท่ง
-//         },
-//     },
-//     tooltip: {
-//         shared: true,
-//         intersect: false,
-//     }
-// };
-
-// // เรนเดอร์กราฟ
-// setTimeout(() => {
-//     document.querySelectorAll(".TopDepartmentsRequestChart").forEach(chartElement => {
-//         const topDepartmentsRequestChart = new ApexCharts(chartElement, topDepartmentsRequestOptions);
-//         topDepartmentsRequestChart.render();
-//     });
-// }, 100);
 
 // ข้อมูลตัวอย่าง
 const dataForWorkforceProcessChart = {
@@ -1040,12 +909,12 @@ const workforceTransferCostData = {
         }
     ],
     categories: [
-        'แผนก A',
-        'แผนก B',
-        'แผนก C',
-        'แผนก D',
-        'แผนก E'
-    ] // ชื่อแผนกรับโอน
+        'บริษัท A',
+        'บริษัท B',
+        'บริษัท C',
+        'บริษัท D',
+        'บริษัท E'
+    ] // ชื่อบริษัทรับโอน
 };
 
 // ตั้งค่ากราฟ
@@ -1059,7 +928,7 @@ const workforceTransferCostOptions = {
     xaxis: {
         categories: workforceTransferCostData.categories, // กำหนดแกน X
         title: {
-            text: 'แผนกรับโอน'
+            text: 'บริษัทที่โอนนพนักงานออก'
         }
     },
     yaxis: {
@@ -1091,8 +960,6 @@ setTimeout(() => {
         workforceTransferCostChart.render();
     });
 }, 100);
-
-
 
 
 // ข้อมูลตัวหลัก
@@ -1151,12 +1018,12 @@ const mainChartOptions = {
     xaxis: {
         categories: mainData.categories,
         title: {
-            text: 'บริษัท'
+            text: 'จำนวนพนักงาน (คน)'
         }
     },
     yaxis: {
         title: {
-            text: 'จำนวนพนักงาน (คน)'
+            text: 'บริษัท'
         }
     },
     legend: {
@@ -1236,3 +1103,76 @@ function toggleDetailedChart(companyName) {
 // สร้างกราฟหลัก
 const mainChart = new ApexCharts(document.querySelector(".WorkforceExpandableChart"), mainChartOptions);
 mainChart.render();
+
+// ข้อมูลตัวอย่าง
+const dataForDepartmentTransferCosts = {
+    series: [
+        {
+            name: 'ค่าแรง',
+            data: [50000, 60000, 70000] // ค่าแรงที่จ่ายให้แผนก A, B, C
+        },
+        {
+            name: 'ค่าโอที',
+            data: [15000, 18000, 20000] // ค่าโอทีที่จ่ายให้แผนก A, B, C
+        },
+        {
+            name: 'ค่าเบี้ยเลี้ยง',
+            data: [10000, 12000, 13000] // ค่าเบี้ยเลี้ยงที่จ่ายให้แผนก A, B, C
+        },
+        {
+            name: 'ค่าแรงรวม',
+            data: [75000, 90000, 103000] // ค่าแรงรวมที่จ่ายให้แผนก A, B, C
+        }
+    ],
+    categories: ['บริษัท A', 'บริษัท B', 'บริษัท C'] // รายชื่อแผนกโอนออกกำลังคน
+};
+
+// ตั้งค่ากราฟ
+const departmentTransferCostChartOptions = {
+    chart: {
+        type: 'bar',
+        height: 400,
+        stacked: false // ไม่ให้แท่งวางซ้อนกัน
+    },
+    series: dataForDepartmentTransferCosts.series,
+    xaxis: {
+        categories: dataForDepartmentTransferCosts.categories, // กำหนดแกน X เป็นรายแผนก
+        title: {
+            text: 'บริษัทที่รับโอนพนักงาน'
+        }
+    },
+    yaxis: {
+        title: {
+            text: 'ค่าใช้จ่าย (บาท)'
+        }
+    },
+    legend: {
+        position: 'top', // ย้าย Legend ไปด้านบน
+        horizontalAlign: 'center'
+    },
+    colors: ['#1F77B4', '#FF7F0E', '#FFC000', '#3EA8F4'], // สีสำหรับแต่ละประเภทค่าแรง
+    plotOptions: {
+        bar: {
+            horizontal: false,
+            columnWidth: '50%' // ความกว้างของแท่ง
+        }
+    },
+    tooltip: {
+        shared: true,
+        intersect: false,
+        y: {
+            formatter: function (value) {
+                return value.toLocaleString() + ' บาท'; // รูปแบบตัวเลขและหน่วย "บาท"
+            }
+        }
+    }
+};
+
+// เรนเดอร์กราฟ
+setTimeout(() => {
+    document.querySelectorAll(".TransferCostByDepartmentChart").forEach(chartElement => {
+        const departmentTransferCostChart = new ApexCharts(chartElement, departmentTransferCostChartOptions);
+        departmentTransferCostChart.render();
+    });
+}, 100);
+
