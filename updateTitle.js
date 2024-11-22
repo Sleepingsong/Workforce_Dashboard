@@ -31,6 +31,9 @@ document.getElementById("gender-chart-title").innerHTML =
 document.getElementById("nationality-chart-title").innerHTML = 
     `กำลังคนจำแนกตามสัญชาติและเพศ<span class="date">ณ วันที่ ${getCurrentDate()}</span>`;
 
+document.getElementById("comp-gender-chart-title").innerHTML = 
+    `สัดส่วนจำนวนพนักงานรวมทุกบริษัท จำแนกตามเพศ<span class="date">ณ วันที่ ${getCurrentDate()}</span>`;
+
 
 // อัปเดตหัวข้อของกราฟต่างๆ ด้วยฟังก์ชัน updateChartTitle
 updateChartTitle("overall-employee-status-title", "เปรียบเทียบกำลังคนทั้งหมด, กำลังคนว่าง, และขอกำลังคน");

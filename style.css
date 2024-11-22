@@ -86,3 +86,16 @@ legend {
     border-radius: 50%;
     margin-right: 8px;
 }
+
+ /* เพิ่ม Transition */
+ .WorkforceDetailedChart {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.5s ease, max-height 0.5s ease;
+}
+
+.WorkforceDetailedChart.active {
+    opacity: 1;
+    max-height: 600px; /* ปรับตามขนาดที่เหมาะสม */
+}
