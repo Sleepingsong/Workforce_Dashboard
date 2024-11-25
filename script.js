@@ -227,13 +227,24 @@ const chartsData = [
             ],
             categories: ['บริษัท A', 'บริษัท B', 'บริษัท C', 'บริษัท D', 'บริษัท E']
         },
-        options: (data) => getBarChartOptions(
-            data.series,
-            data.categories,
-            'บริษัท',
-            'จำนวนพนักงาน (คน)',
-            ['#1F77B4', '#FF7F0E']
-        )
+        options: (data) => {
+            // คำนวณผลรวมของพนักงานชายและหญิง
+            const totalMale = data.series[0].data.reduce((a, b) => a + b, 0);
+            const totalFemale = data.series[1].data.reduce((a, b) => a + b, 0);
+
+            // เพิ่มผลรวมเข้าไปในชุดข้อมูลและหมวดหมู่
+            data.series[0].data.push(totalMale);
+            data.series[1].data.push(totalFemale);
+            data.categories.push('ผลรวมทั้งหมด');
+
+            return getBarChartOptions(
+                data.series,
+                data.categories,
+                'บริษัท',
+                'จำนวนพนักงาน (คน)',
+                ['#1F77B4', '#FF7F0E']
+            );
+        }
     },
     {
         selector: '.EmployeeTypeByGenderChart',
