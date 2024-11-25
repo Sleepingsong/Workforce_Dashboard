@@ -439,12 +439,12 @@ function renderMainChart() {
         xaxis: {
             categories: mainData.categories,
             title: {
-                text: 'บริษัท'
+                text: 'จำนวนพนักงาน (คน)'
             }
         },
         yaxis: {
             title: {
-                text: 'จำนวนพนักงาน (คน)'
+                text: 'บริษัท'
             }
         },
         legend: {
