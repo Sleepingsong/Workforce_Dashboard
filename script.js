@@ -499,3 +499,171 @@ function renderMainChart() {
         }
     }
 }
+
+// ข้อมูลตัวอย่างสำหรับผู้ใช้งานระบบจำแนกตาม Role
+const dataForUserByRoleChart = {
+    series: [
+        {
+            name: 'จำนวนผู้ใช้',
+            data: [135, 5, 7, 6, 5, 10, 15] // จำนวนผู้ใช้งานในแต่ละ Role
+        }
+    ],
+    categories: ['Department Head', 'HR Head', 'HR Admin', 'HR Manager', 'SuperAdmin', 'BU11', 'BU113'] // ชื่อ Role
+};
+
+// ตั้งค่ากราฟ
+const userByRoleChartOptions = {
+    chart: {
+        type: 'bar',
+        height: 400,
+    },
+    series: dataForUserByRoleChart.series,
+    xaxis: {
+        categories: dataForUserByRoleChart.categories, // กำหนดแกน X เป็น Role
+        title: {
+            text: 'บทบาท (Role)'
+        }
+    },
+    yaxis: {
+        title: {
+            text: 'จำนวนผู้ใช้งาน (คน)'
+        }
+    },
+    legend: {
+        show: false // ไม่ต้องแสดง Legend เนื่องจากมีเพียง Series เดียว
+    },
+    colors: ['#1F77B4'], // สีของแท่งกราฟ
+    plotOptions: {
+        bar: {
+            horizontal: false, // กราฟแนวตั้ง
+            columnWidth: '50%' // ขนาดความกว้างของแท่ง
+        }
+    },
+    tooltip: {
+        shared: true,
+        intersect: false,
+        y: {
+            formatter: function (value) {
+                return value.toLocaleString() + ' คน'; // รูปแบบตัวเลขและหน่วย "คน"
+            }
+        }
+    }
+};
+
+// เรนเดอร์กราฟ
+setTimeout(() => {
+    document.querySelectorAll(".UserByRoleChart").forEach(chartElement => {
+        const userByRoleChart = new ApexCharts(chartElement, userByRoleChartOptions);
+        userByRoleChart.render();
+    });
+}, 100);
+
+// ข้อมูลตัวอย่างสำหรับจำนวนครั้งการ Login
+const dataForLoginStatisticsChart = {
+    series: [
+        {
+            name: 'จำนวนครั้งการ Login',
+            data: [120, 150, 180, 140, 200, 170, 190] // จำนวนครั้งการ Login ในแต่ละวัน
+        }
+    ],
+    categories: ['2024-11-16', '2024-11-17', '2024-11-18', '2024-11-19', '2024-11-20', '2024-11-21', '2024-11-22'] // วันที่
+};
+
+// ตั้งค่ากราฟ
+const loginStatisticsChartOptions = {
+    chart: {
+        type: 'bar',
+        height: 400,
+    },
+    series: dataForLoginStatisticsChart.series,
+    xaxis: {
+        categories: dataForLoginStatisticsChart.categories, // กำหนดแกน X เป็นวันที่
+        title: {
+            text: 'วันที่'
+        }
+    },
+    yaxis: {
+        title: {
+            text: 'จำนวนครั้งการ Login'
+        }
+    },
+    colors: ['#1F77B4'], // สีของแท่งกราฟ
+    plotOptions: {
+        bar: {
+            horizontal: false, // แสดงกราฟแนวตั้ง
+            columnWidth: '50%' // ขนาดความกว้างของแท่ง
+        }
+    },
+    tooltip: {
+        shared: true,
+        intersect: false,
+        y: {
+            formatter: function (value) {
+                return value.toLocaleString() + ' ครั้ง'; // รูปแบบตัวเลขและหน่วย "ครั้ง"
+            }
+        }
+    }
+};
+
+// เรนเดอร์กราฟ
+setTimeout(() => {
+    document.querySelectorAll(".LoginStatisticsChart").forEach(chartElement => {
+        const loginStatisticsChart = new ApexCharts(chartElement, loginStatisticsChartOptions);
+        loginStatisticsChart.render();
+    });
+}, 100);
+
+// ข้อมูลตัวอย่างสำหรับจำนวนครั้งการ Login ของผู้ใช้งานระบบ
+const dataForLoginByUserChart = {
+    series: [
+        {
+            name: 'จำนวนครั้งการ Login',
+            data: [20, 35, 40, 10, 50, 25] // จำนวนครั้งการ Login ของผู้ใช้แต่ละคน
+        }
+    ],
+    categories: ['User A', 'User B', 'User C', 'User D', 'User E', 'User F'] // รายชื่อผู้ใช้งานระบบ
+};
+
+// ตั้งค่ากราฟ
+const loginByUserChartOptions = {
+    chart: {
+        type: 'bar',
+        height: 400,
+    },
+    series: dataForLoginByUserChart.series,
+    xaxis: {
+        categories: dataForLoginByUserChart.categories, // กำหนดแกน X เป็นรายชื่อผู้ใช้งานระบบ
+        title: {
+            text: 'ผู้ใช้งานระบบ'
+        }
+    },
+    yaxis: {
+        title: {
+            text: 'จำนวนครั้งการ Login'
+        }
+    },
+    colors: ['#FF7F0E'], // สีของแท่งกราฟ
+    plotOptions: {
+        bar: {
+            horizontal: false, // แสดงกราฟแนวตั้ง
+            columnWidth: '50%' // ขนาดความกว้างของแท่ง
+        }
+    },
+    tooltip: {
+        shared: true,
+        intersect: false,
+        y: {
+            formatter: function (value) {
+                return value.toLocaleString() + ' ครั้ง'; // รูปแบบตัวเลขและหน่วย "ครั้ง"
+            }
+        }
+    }
+};
+
+// เรนเดอร์กราฟ
+setTimeout(() => {
+    document.querySelectorAll(".LoginByUserChart").forEach(chartElement => {
+        const loginByUserChart = new ApexCharts(chartElement, loginByUserChartOptions);
+        loginByUserChart.render();
+    });
+}, 100);
